@@ -126,6 +126,13 @@ def fetch_and_write():
                             logging.debug(f"Skipping field with null value: {specific_field_key}")
                             continue
 
+                        if isinstance(raw_val, str):
+                            val_lower = raw_val.lower()
+                            if val_lower in ("on", "yes"):
+                                raw_val = 1
+                            elif val_lower in ("off", "no"):
+                                raw_val = 0
+
                         influx_name = rules.get("influx_field_name", "value")
                         
                         if influx_name == "value":
