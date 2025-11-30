@@ -1,8 +1,10 @@
-# ebus_tools
+# ebusd_to_influsdb_tool
 
 A collection of Python scripts to extract data from an eBUS daemon, generate a schema, and push the data to an InfluxDB time-series database.
 
-This is useful for monitoring and visualizing data from your heating system or other eBUS-connected devices.
+This is useful for logging, monitoring, visualizing and preparing the data for machine learning from your heating system or other eBUS-connected devices.
+
+You need the full ebus deamon running an configured for HTTP requests and find out which devices are on the ebus network. Use `ebusctl info` to get all required system details.
 
 ## How it works
 
