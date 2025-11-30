@@ -9,8 +9,8 @@ from influxdb import InfluxDBClient
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # --- Configuration ---
-SCHEMA_CONFIG_FILE = "ebusd_data.json"
-APP_CONFIG_FILE = "config.json"
+SCHEMA_CONFIG_FILE = "data/ebusd_data.json"
+APP_CONFIG_FILE = "data/config.json"
 
 def load_app_config():
     if not os.path.exists(APP_CONFIG_FILE):
@@ -29,12 +29,13 @@ def load_schema_config():
 def fetch_and_write():
     # 1. Load App Config
     app_config = load_app_config()
-    if not app_config or "data_url" not in app_config or "influxdb" not in app_config:
-        logging.error("Failed to load app configuration or 'data_url' or 'influxdb' settings are missing.")
+    if not app_config or "ebusd" not in app_config or "influxdb" not in app_config:
+        logging.error("Failed to load app configuration or 'ebusd' or 'influxdb' settings are missing.")
         return
 
-    DATA_URL = app_config["data_url"]
+    DATA_URL = app_config["ebusd"]["ebusd_url"]
     INFLUX_SETTINGS = app_config["influxdb"]
+    ebusd_http_timeout = app_config["ebusd"]["ebusd_http_timeout"]
     logging.info(f"Using data URL: {DATA_URL}")
 
     # 2. Load Schema
@@ -47,7 +48,7 @@ def fetch_and_write():
     # 3. Fetch Live Data
     try:
         logging.debug(f"Fetching data from {DATA_URL}")
-        response = requests.get(DATA_URL, timeout=10)
+        response = requests.get(DATA_URL, timeout=ebusd_http_timeout)
         response.raise_for_status()
         data = response.json()
         logging.debug(f"Successfully fetched data: {json.dumps(data, indent=2)}")
