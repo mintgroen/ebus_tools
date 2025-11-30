@@ -1,5 +1,15 @@
 {
-    "data_url": "http://192.168.0.3:8889/data?maxage=60",
+    "ebusd": {
+        "schema_data_url_1": "http://127.0.0.1:8889/data/hmu?maxage=60",
+        "ebusd_url_1": "http://127.0.0.1:8889/data/hmu?maxage=60",
+        "schema_data_url_2": "http://127.0.0.1:8889/data/basv?maxage=60",
+        "ebusd_url_2": "http://127.0.0.1:8889/data/basv?maxage=60",
+        "schema_data_url_3": "",
+        "ebusd_url_3": "",
+        "schema_data_url_4": "",
+        "ebusd_url_4": "",
+        "ebusd_http_timeout": 60
+    },
     "influxdb": {
         "host": "localhost",
         "port": 8086,
