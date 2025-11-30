@@ -79,7 +79,6 @@ def fetch_and_write():
         for measure_name, live_root in data.items():
 
             if measure_name not in schema:
-                logging.warning(f"Measurement '{measure_name}' from fetched data not found in schema. Skipping.")
                 continue
 
             sensors_config = schema[measure_name]
